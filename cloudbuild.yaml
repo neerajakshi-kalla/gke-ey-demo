@@ -1,25 +1,14 @@
 steps:
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['build', '-t', 'us-west1-docker.pkg.dev/ey-demo-proj/gke-repo/quickstart-image', './app1' ]
+  args: ['build', '-t', 'us-central1-docker.pkg.dev/ey-demo-proj/gke-ey-demo/quickstart-image', './app1' ]
   id: 'Build Docker Image'
 
   # images:
   # - 'us-west1-docker.pkg.dev/<your_project_id>/gke-repo/quickstart-image'
 
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['push', 'us-west1-docker.pkg.dev/ey-demo-proj/gke-repo/quickstart-image' ]
+  args: ['push', 'us-central1-docker.pkg.dev/ey-demo-proj/gke-ey-demo/quickstart-image' ]
   id: 'Push Docker Image'
-
-- name: 'gcr.io/cloud-builders/docker'
-  args: ['build', '-t', 'us-west1-docker.pkg.dev/ey-demo-proj/gke-repo/flask-image', './app2' ]
-  id: 'Build Docker Image2'
-
-  # images:
-  # - 'us-west1-docker.pkg.dev/<your_project_id>/gke-repo/quickstart-image'
-
-- name: 'gcr.io/cloud-builders/docker'
-  args: ['push', 'us-west1-docker.pkg.dev/ey-demo-proj/gke-repo/flask-image' ]
-  id: 'Push Docker Image2'
 
 
 - name: 'google/cloud-sdk:latest'
@@ -28,9 +17,9 @@ steps:
   - -xe
   - -c
   - |
-    gcloud deploy apply --file deploy/pipeline.yaml --region=us-west1
-    gcloud deploy apply --file deploy/dev.yaml --region=us-west1
-    gcloud deploy releases create 'app-release-${SHORT_SHA}' --delivery-pipeline=ey-task-cicd --region=us-west1 --skaffold-file=skaffold.yaml
+    gcloud deploy apply --file deploy/pipeline.yaml --region=us-central1
+    gcloud deploy apply --file deploy/dev.yaml --region=us-central1
+    gcloud deploy releases create 'app-release-${SHORT_SHA}' --delivery-pipeline=ey-task-cicd --region=us-central1 --skaffold-file=skaffold.yaml
 
 
 options:
