@@ -6,5 +6,5 @@ metadata:
   labels: {}
 description: dev
 gke:
-  cluster: projects/ey-demo-proj/locations/us-west1-a/clusters/ey-task-cluster
+  cluster: projects/ey-demo-proj/locations/us-central1-a/clusters/ey-task-cluster
 
